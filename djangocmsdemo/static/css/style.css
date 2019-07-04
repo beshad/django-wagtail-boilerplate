@@ -17,6 +17,10 @@ header, footer  {
   background-color: #001;
 }
 
+.home {
+  background-color: #ff1;
+}
+
 @media (min-width: 960px) {
   .a {
     grid-column: 1;
