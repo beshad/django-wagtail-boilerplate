@@ -1,0 +1,23 @@
+{% extends "wagtailadmin/login.html" %}
+
+{% block above_login %} If you are not an authorized peson then you should not be here! {% endblock %}
+
+{% block branding_login %}Sign in to this demo site{% endblock %}
+
+{% comment %} {% block fields %}
+    {{ block.super }}
+    <li class="full">
+        <div class="field iconfield">
+            Two factor auth token
+            <div class="input icon-key">
+                <input type="text" name="two-factor-auth">
+            </div>
+        </div>
+    </li>
+{% endblock %} {% endcomment %}
+
+    {% block login_form %}
+       <div style="max-width:500px;margin:0 auto;">
+            {{ block.super }}
+        </div>
+    {% endblock %}
