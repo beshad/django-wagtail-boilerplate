@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.modeladmin',
     'wagtailmenus',
+    'widget_tweaks',
 
     'modelcluster',
     'taggit',

@@ -3,3 +3,4 @@ wagtail>=2.5,<2.6
 mysqlclient
 pep8
 wagtailmenus
+django-widget-tweaks

@@ -31,3 +31,6 @@ class ContactPage(AbstractEmailForm):
             FieldPanel('subject'),
         ], "Email"),
     ]
+
+    def get_form_fields(self):
+        return self.form_fields.all()
