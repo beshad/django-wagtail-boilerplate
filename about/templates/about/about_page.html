@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailimages_tags %}
 
 {% block body_class %}about{% endblock %}
 
@@ -7,15 +7,23 @@
 
 {% block content %}
 <h1 class="text-center">{{ page.title }}</h1>
-<section>
-  <div class="box a"></div>
-  <div class="box b"></div>
-  <div class="box c"></div>
-  <div class="box d"></div>
-  <div class="box e"></div>
-  <div class="box f"></div>
-  <div class="box g"></div>
-  <div class="box h"></div>
-</section>
+
+<div class="container">
+
+<img src="{% static 'images/image-1.jpg' %}" width="300"> 
+
+<div class="row">
+
+          {% for photo in page.gallery_images.all %}
+              <div class="col-xs-6 m-2">
+                {% image photo.image fill-300x300-c100 format-png class="responsive"%}
+              </div>
+          {% endfor %}
+
+   {% image page.photo width-400 %}
+   {% image page.photo fill-80x80 %}
+
+</div>
+</div>
  
 {% endblock content %}

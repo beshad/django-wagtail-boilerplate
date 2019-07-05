@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailimages_tags%}
 
 {% block body_class %}home{% endblock %}
 
@@ -7,6 +7,10 @@
 
 {% block content %}
 <h1 class="text-center">{{ page.title }}</h1>
+
+  <figure class="hidden-md-up">
+        {% image page.image width-500 %}
+  </figure>
 
 <section>
   <div class="box a"></div>
