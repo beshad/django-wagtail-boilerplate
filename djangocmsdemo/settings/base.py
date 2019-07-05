@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'search',
     'dashboard',
     'about',
+    'contact',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-    
+
     'wagtail.contrib.modeladmin',
     'wagtailmenus',
 
