@@ -6,12 +6,33 @@ from wagtail.core.fields import RichTextField
 
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from modelcluster.fields import ParentalManyToManyField
+from wagtail.snippets.models import register_snippet
+
+
+@register_snippet
+class Country(models.Model):
+    models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "List of Countries"
+
 
 class HomePage(Page):
 
     templates = 'home/home_page.html'
     header = models.CharField(max_length=100, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
 
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -20,11 +41,12 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
-)
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('body'),
+        FieldPanel('country'),
         ImageChooserPanel('image')
     ]
 
