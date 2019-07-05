@@ -1,13 +1,15 @@
 from django.db import models
 
 from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
 
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.snippets.models import register_snippet
+
+from pycms.base.blocks import BaseStreamBlock
 
 
 @register_snippet
@@ -25,13 +27,9 @@ class HomePage(Page):
 
     templates = 'home/home_page.html'
     header = models.CharField(max_length=100, blank=True, null=True)
-    body = RichTextField(blank=True, null=True)
-
-    country = models.ForeignKey(
-        Country,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+    # body = RichTextField(blank=True, null=True)
+    body = StreamField(
+        BaseStreamBlock(), verbose_name="Page body", blank=True
     )
 
     image = models.ForeignKey(
@@ -45,8 +43,7 @@ class HomePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
-        FieldPanel('body'),
-        FieldPanel('country'),
+        StreamFieldPanel('body'),
         ImageChooserPanel('image')
     ]
 

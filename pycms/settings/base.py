@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'pycms.base',
     'pycms.home',
     'search',
-    'pycms.dashboard',
     'pycms.about',
     'pycms.contact',
 
