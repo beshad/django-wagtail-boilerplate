@@ -1,4 +1,4 @@
-#!/Code/sandbox/djangocmsdemo/env/bin/python3
+#!/Code/sandbox/pycms/env/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
