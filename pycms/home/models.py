@@ -9,7 +9,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.snippets.models import register_snippet
 
-from pycms.base.blocks import BaseStreamBlock
+from pycms.base.blocks import BaseStreamBlock, AlternativeStreamBlock
 
 
 @register_snippet
@@ -32,6 +32,10 @@ class HomePage(Page):
         BaseStreamBlock(), verbose_name="Page body", blank=True
     )
 
+    text = StreamField(
+        AlternativeStreamBlock(), verbose_name="Text Body", blank=True
+    )
+
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -44,7 +48,8 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         StreamFieldPanel('body'),
-        ImageChooserPanel('image')
+        ImageChooserPanel('image'),
+        StreamFieldPanel('text')
     ]
 
     class Meta:

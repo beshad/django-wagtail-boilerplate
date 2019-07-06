@@ -1,7 +1,7 @@
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.core.blocks import (
-    CharBlock, ChoiceBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock,
+    CharBlock, ChoiceBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, ListBlock, PageChooserBlock, URLBlock
 )
 
 
@@ -65,3 +65,31 @@ class BaseStreamBlock(StreamBlock):
         help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
         icon="fa-s15",
         template="blocks/embed_block.html")
+
+class SimpleTextBlock(StructBlock):
+  simple_text = TextBlock()
+
+
+class CardBlock(StructBlock):
+
+    title = CharBlock(required=True, help_text="add your title")
+    cards = ListBlock(
+        StructBlock(
+                [
+                    ("image", ImageChooserBlock(required=False)),
+                    ("title", CharBlock(required=False)),
+                    ("body", RichTextBlock(required=False)),
+                    ("page", PageChooserBlock(required=False)),
+                    ("button", URLBlock(required=False))
+               ]
+        )
+    )
+
+class AlternativeStreamBlock(StreamBlock):
+    text_block = SimpleTextBlock()
+    heading_block = HeadingBlock()
+    paragraph_block = RichTextBlock(
+        icon="fa-paragraph",
+        template="blocks/paragraph_block.html"
+    )
+    card_block = CardBlock()
