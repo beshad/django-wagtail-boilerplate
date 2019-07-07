@@ -29,9 +29,11 @@ INSTALLED_APPS = [
     'search',
     'pycms.about',
     'pycms.contact',
+    'pycms.global_settings',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.settings',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -87,7 +89,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'wagtailmenus.context_processors.wagtailmenus'
+                'wagtailmenus.context_processors.wagtailmenus',
+                'wagtail.contrib.settings.context_processors.settings'
             ],
         },
     },
@@ -105,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wagtailcms',
         'USER': 'beshad',
-        'PASSWORD': '',
+        'PASSWORD': 'xeba1350',
         'HOST': 'localhost',
         'PORT': ''
     }
