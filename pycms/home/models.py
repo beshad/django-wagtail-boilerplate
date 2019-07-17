@@ -10,8 +10,8 @@ from modelcluster.fields import ParentalManyToManyField
 from wagtail.snippets.models import register_snippet
 
 from pycms.base.blocks import BaseStreamBlock, AlternativeStreamBlock
-
-
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 @register_snippet
 class Country(models.Model):
     models.CharField(max_length=100)
@@ -36,6 +36,12 @@ class HomePage(Page):
         AlternativeStreamBlock(), verbose_name="Text Body", blank=True
     )
 
+    basic_stream_example = StreamField([
+        ('heading', blocks.CharBlock(classname="full title",help_text='super helpful text')),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ],blank=True, null=True, verbose_name="Basic Stream Example")
+
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -46,6 +52,7 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
+        StreamFieldPanel('basic_stream_example'),
         FieldPanel('header'),
         StreamFieldPanel('body'),
         ImageChooserPanel('image'),

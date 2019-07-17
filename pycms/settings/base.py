@@ -108,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wagtailcms',
         'USER': 'beshad',
-        'PASSWORD': 'xeba1350',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': ''
     }
