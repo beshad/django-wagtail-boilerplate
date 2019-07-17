@@ -1,7 +1,7 @@
 from django.db import models
 
 from wagtail.core.models import Page, Orderable
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, PageChooserPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, PageChooserPanel, FieldRowPanel
 from wagtail.core.fields import RichTextField, StreamField
 
 from modelcluster.fields import ParentalKey
@@ -25,6 +25,9 @@ class AboutPage(Page):
     body = RichTextField(blank=True, null=True)
     date = models.DateField("Selected Date")
     cover = models.TextField(max_length=100, blank=True, null=True)
+    left = models.CharField(max_length=100, blank=True, null=True)
+    right = models.CharField(max_length=100, blank=True, null=True)
+    main = models.CharField(max_length=100, blank=True, null=True, help_text="Some very useful text")
 
     selection = StreamField([
         ('heading', blocks.CharBlock(label="Some cool heading")),
@@ -47,6 +50,13 @@ class AboutPage(Page):
         FieldPanel('header'),
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('left', classname="col6"),
+                FieldPanel('right', classname="col6"),
+            ]),
+            FieldPanel('main', classname="col12"),
+        ], heading="Example of field row"),
         MultiFieldPanel(
         [
             FieldPanel('date'),
