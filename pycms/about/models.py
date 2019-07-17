@@ -1,12 +1,13 @@
 from django.db import models
 
 from wagtail.core.models import Page, Orderable
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.core.fields import RichTextField, StreamField
 
 from modelcluster.fields import ParentalKey
 
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -22,6 +23,8 @@ class AboutPage(Page):
     templates = 'about/about_page.html'
     header = models.CharField(max_length=100, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
+    date = models.DateField("Selected Date")
+    cover = models.TextField(max_length=100, blank=True, null=True)
 
     selection = StreamField([
         ('heading', blocks.CharBlock(label="Some cool heading")),
@@ -43,7 +46,15 @@ class AboutPage(Page):
         StreamFieldPanel('selection'),
         FieldPanel('header'),
         FieldPanel('body'),
-        InlinePanel('gallery_images', label="Gallery images")
+        InlinePanel('gallery_images', label="Gallery images"),
+        MultiFieldPanel(
+        [
+            FieldPanel('date'),
+            FieldPanel('cover')
+        ],
+        heading="Collection of Some Fields",
+        classname="collapsible collapsed"
+    ),
     ]
 
     class Meta:
