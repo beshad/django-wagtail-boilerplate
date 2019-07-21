@@ -21,7 +21,7 @@ MIDDLEWARE = MIDDLEWARE + [
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-INTERNAL_IPS = ("127.0.0.1", "172.17.0.1")
+INTERNAL_IPS = ("127.0.0.1")
 
 # Uncomment this line to enable template caching
 # Dont forget to change the LOCATION path
