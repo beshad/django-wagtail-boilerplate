@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'pycms.contact',
     'pycms.global_settings',
     'pycms.blog',
+    'pycms.custom_items',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',

@@ -3,6 +3,9 @@ from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from modelcluster.fields import ParentalKey
 
+from wagtail.core.fields import RichTextField
+
+
 from wagtail.admin.edit_handlers import (
     ObjectList, 
     TabbedInterface,   
@@ -14,6 +17,8 @@ from wagtail.admin.edit_handlers import (
 
 class BlogPage(Page):
 
+  templates= 'blog/blog_page.html'
+
   text = models.CharField(max_length=100, blank=False, null=True)
 
   head = models.CharField(max_length=100, blank=False, null=True)
@@ -23,7 +28,8 @@ class BlogPage(Page):
   # settings_panels=[]
 
   content_panels = Page.content_panels + [
-    FieldPanel("text")
+    FieldPanel("text"),
+    InlinePanel('first_section', label="First Section")
   ]
 
   another_panels = [
@@ -50,3 +56,14 @@ class BlogPage(Page):
   class Meta:
       verbose_name = "Blog Page"
       verbose_name_plural = "Blog Pages"
+
+
+class FirstSection(Orderable):
+    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='first_section')
+    header = models.CharField(max_length=255)
+    body = RichTextField(blank=True, null=True)
+
+    panels = [
+        FieldPanel('header'),
+        FieldPanel('body'),
+    ]
