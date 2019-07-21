@@ -1,5 +1,11 @@
+ {% extends "base.html" %}
  {% load wagtailcore_tags %}
- {% for thing in page.first_section.all %}
-        <h2>{{thing.header}}</h2>
-        {{ thing.body|richtext }}
-    {% endfor %}
+
+ {% block content %}
+
+        {% for thing in page.first_section.all %}
+                <h2>{{thing.header}}</h2>
+                {{ thing.body|richtext }}
+        {% endfor %}
+
+    {% endblock content %}
