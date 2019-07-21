@@ -31,8 +31,6 @@ class BlogAuthor(models.Model):
       return self.name
 
 
-register_snippet(BlogAuthor)
-
 class BlogPage(Page):
 
   templates= 'blog/blog_page.html'
@@ -71,6 +69,12 @@ class BlogPage(Page):
     ]
   )
 
+  def get_context(self, request, *args, **kwargs):
+        """Adding custom stuff to our context."""
+        context = super().get_context(request, *args, **kwargs)
+        context["authors"] = BlogAuthor.objects.all()
+        return context
+
   class Meta:
       verbose_name = "Blog Page"
       verbose_name_plural = "Blog Pages"
@@ -85,3 +89,6 @@ class FirstSection(Orderable):
         FieldPanel('header'),
         FieldPanel('body'),
     ]
+
+
+register_snippet(BlogAuthor)
