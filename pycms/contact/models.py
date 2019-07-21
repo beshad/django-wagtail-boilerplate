@@ -15,8 +15,6 @@ class FormField(AbstractFormField):
 
 
 class ContactPage(AbstractEmailForm):
-
-    templates = 'contact/contact_page.html'
     
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'pycms.about',
     'pycms.contact',
     'pycms.global_settings',
+    'pycms.blog',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -108,7 +109,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wagtailcms',
         'USER': 'beshad',
-        'PASSWORD': '',
+        'PASSWORD': 'xeba1350',
         'HOST': 'localhost',
         'PORT': ''
     }
