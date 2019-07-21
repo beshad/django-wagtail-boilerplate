@@ -4,7 +4,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from modelcluster.fields import ParentalKey
 
 from wagtail.core.fields import RichTextField
-
+from wagtail.snippets.models import register_snippet
 
 from wagtail.admin.edit_handlers import (
     ObjectList, 
@@ -14,6 +14,24 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
     InlinePanel
 )
+
+class BlogAuthor(models.Model):
+  name=models.CharField(max_length=50)
+
+  panels = [
+    MultiFieldPanel(
+      [
+        FieldPanel("name")
+      ],
+      heading="Name Example"
+    )
+  ]
+
+  def __str__(self):
+      return self.name
+
+
+register_snippet(BlogAuthor)
 
 class BlogPage(Page):
 
