@@ -1,7 +1,10 @@
  {% extends "base.html" %}
- {% load wagtailcore_tags %}
+ {% load wagtailcore_tags wagtailimages_tags %}
 
  {% block content %}
+
+{{ page.title }}
+ {% image page.logo fill-500x500 %}
 
         {% for thing in page.first_section.all %}
                 <h2>{{thing.header}}</h2>

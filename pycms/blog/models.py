@@ -6,13 +6,16 @@ from modelcluster.fields import ParentalKey
 from wagtail.core.fields import RichTextField
 from wagtail.snippets.models import register_snippet
 
+from wagtail.images.edit_handlers import ImageChooserPanel
+
 from wagtail.admin.edit_handlers import (
     ObjectList, 
     TabbedInterface,   
     FieldPanel,
     MultiFieldPanel,
     StreamFieldPanel,
-    InlinePanel
+    InlinePanel,
+    FieldRowPanel
 )
 
 class BlogAuthor(models.Model):
@@ -38,17 +41,41 @@ class BlogPage(Page):
   text = models.CharField(max_length=100, blank=False, null=True)
 
   head = models.CharField(max_length=100, blank=False, null=True)
-  body = models.CharField(max_length=100, blank=False, null=True)
+  body = models.CharField(
+        max_length=100,
+        blank=False,
+        null=False,
+        help_text='Overwrites the default title',
+  )
+  logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+  open_in_new_tab = models.BooleanField(default=False, blank=True, verbose_name="Example")
+
+  banner_image = models.ForeignKey(
+        "wagtailimages.Image",
+        blank=False,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+    )
 
   # promote_panels=[]
   # settings_panels=[]
 
   content_panels = Page.content_panels + [
     FieldPanel("text"),
-    InlinePanel('first_section', label="First Section")
+    InlinePanel('first_section', label="First Section"),
+    ImageChooserPanel("banner_image")
   ]
 
   another_panels = [
+        ImageChooserPanel('logo'),
+        FieldPanel("open_in_new_tab"),
         MultiFieldPanel(
             [
                 FieldPanel("head"),
