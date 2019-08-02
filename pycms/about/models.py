@@ -20,7 +20,7 @@ class AboutPage(Page):
         class Meta:
             icon = 'image'
 
-    templates = 'about/about_page.html'
+    template = 'about/about_page.html'
     header = models.CharField(max_length=100, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
     date = models.DateField("Selected Date")

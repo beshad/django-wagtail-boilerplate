@@ -36,7 +36,7 @@ class BlogAuthor(models.Model):
 
 class BlogPage(Page):
 
-  templates= 'blog/blog_page.html'
+  template= 'blog/blog_page.html'
 
   text = models.CharField(max_length=100, blank=False, null=True)
 
